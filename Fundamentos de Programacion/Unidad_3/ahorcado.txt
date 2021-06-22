@@ -1,0 +1,1 @@
+{'Paises': {1:'Rusia', 2:'Canada', 3:'China', 4: 'Australia', 5:'Nueva Zelanda'}, 'Musica': {1:'Clasica', 2:'Metal', 3:'Rock', 4:'Electronica', 5:'Indie Rock'}, 'Frutas': {1:'Banano', 2:'Higo', 3:'Pera', 4:'Durazco', 5:'Coco'}, 'Animales': {1:'Perro', 2:'Gato', 3:'Conejo', 4:'Caballo', 5:'Delfin'}, 5:'Peliculas': {1:'Brave', 2:'Conjuro', 3:'Shrek', 4:'Mulan', 5:'I Origins'}}

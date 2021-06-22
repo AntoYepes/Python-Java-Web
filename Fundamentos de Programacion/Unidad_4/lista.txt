@@ -1,0 +1,6 @@
+user1;password1;1;Mario S;menu;Opcion 1;Opcion 2;Opcion 3
+user2;password2;0;Juan P;menu;Opcion 1;Opcion 2;Opcion 3;Opcion 4
+user3;password3;1;Manuela O;menu;Opcion 1;Opcion 2;Opcion 3;Opcion 4
+user4;password4;1;Sergio S;menu;Opcion 1;Opcion 2;Opcion 3
+user5;password5;0;Maria T;menu;Opcion 1;Opcion 2;Opcion 3
+user6;password6;1;Alejo N;menu;Opcion 1;Opcion 2;Opcion 3
