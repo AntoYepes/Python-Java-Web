@@ -51,8 +51,6 @@ def get_distance(coordenada, matriz, flag2 = 0):
     if flag2 == 1:
         return matriz[need_indx[2]]
     
-    
-    
     if users_1 <= users_2:
         flag = [0, 1]
         u1 = users_1

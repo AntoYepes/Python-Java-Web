@@ -33,15 +33,89 @@ def verif(info):
             print('Error coordenada')
             exit()
 
+# Funcion que encuentra los 2 valores min con indices
+def min_values(lista):
+    m1 = min(lista)
+    indx1 = lista.index(m1)
+    m2 = min(v for v in lista if v != m1) 
+    indx2 = lista.index(m2)
+    return [m1, m2, indx1, indx2]
+
+# Funcion que calcula la distancia con la coord actual
+def get_distance(coordenada, matriz, flag2 = 0):
+    coord = coordenada # toma el valor de la coordenada que el usuario escoja
+    # punto 1 coord
+    lat1 = coord[0] # latitud punto1
+    lon1 = coord[1] # long punto 1
+    # punto 2 cada coso del matrix
+    list_distc = []
+    for i in matriz:
+        lat2 = i[0]
+        lon2 = i[1]
+        d_lat = round(lat2 - lat1, 3)
+        d_lon = round(lon2 - lon1, 3)  
+        r_tierra = 6372.795
+        distance = 2 * r_tierra * math.sin(math.sqrt((math.pow(math.sin(d_lat/2), 2))+(math.cos(lat1))*(math.cos(lat2))*(math.pow(math.sin(d_lon/2), 2))))
+        list_distc.append(int(distance))
+    need_indx = min_values(list_distc) # lista donde tengo los valores minimos y los indices de las 2 distancias menores
+    # Comparar usuarios
+    users_1 = matriz[need_indx[2]][2]
+    users_2 = matriz[need_indx[3]][2]
+    
+    if flag2 == 1:
+        return matriz[need_indx[2]]
+    
+    if users_1 <= users_2:
+        flag = [0, 1]
+        u1 = users_1
+        u2 = users_2
+    else:
+        flag = [1, 0]
+        u1 = users_2 
+        u2 = users_1 
+        
+    if flag2 == 0:    
+        print(f'La zona wifi 1: ubicada en {coord} a {need_indx[flag[0]]} metros , tiene en promedio {u1} usuarios')
+        print(f'La zona wifi 2: ubicada en {coord} a {need_indx[flag[1]]} metros , tiene en promedio {u2} usuarios')
+    try:
+        choose = int(input(('Elija 1 o 2 para recibir indicaciones de llegada')))
+    except:
+        print('Error zona wifi')
+        exit()
+    if choose == 1:
+        bandera = 2
+    elif choose == 2:
+        bandera = 3
+    # latitud y long de las distancias menores
+    lat1_c = matriz[need_indx[bandera]][0]
+    lon1_c = matriz[need_indx[bandera]][1]
+    
+    address_lat = lat1 - lat1_c
+    if address_lat < 0:
+        lat_result = 'norte'
+    else:
+        lat_result = 'sur'
+    address_lon = lon1 - lon1_c
+    if address_lon < 0:
+        lon_result = 'este'
+    else:
+        lon_result = 'oeste'
+    print(f'Para llegar a la zona wifi dirigirse primero al {lon_result} y luego hacia el {lat_result}')
+        
+    vel_pie = 0.483
+    vel_bici = 3.33
+    tiempo_pie = print('Tiempo a pie: ', int(need_indx[flag[0]]/vel_pie), 'segundos')
+    tiempo_bici = print('Tiempo en bici: ', int(need_indx[flag[0]]/vel_bici), 'segundos')
+    
 datos = []
-password = 83615
+password = 1
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
-os.system('clear')
+os.system('cls')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
-if int(usuario) == 51638: # Se verifica el usuario
+if int(usuario) == 2: # Se verifica el usuario
     contraseña = int(input('Ingrese la contraseña: ')) # Se verifica la contraseña
     if contraseña == password: # Se verifica la contraseña
         num_1 = 638 # Primer No
@@ -170,6 +244,40 @@ if int(usuario) == 51638: # Se verifica el usuario
                             else:
                                 print('Error actualización')
                                 exit()
+                                
+                # Opcion No 3
+                if opc == 3:
+                    matrix = [[6.211, -72.482, 2], 
+                            [6.212, -72.470, 25], 
+                            [6.105, -72.342, 25], 
+                            [6.210, -72.442, 50]]
+                    if datos == []:
+                        print('Error sin registro de coordenadas') 
+                        exit()
+                    else:
+                        info = datos
+                        print(f'coordenada [latitud, longitud] 1 : {info[0]}')
+                        print(f'coordenada [latitud, longitud] 2 : {info[1]}')
+                        print(f'coordenada [latitud, longitud] 3 : {info[2]}')
+                        try:
+                            opcion = int(input(('Por favor elija su ubicación actual (1,2 ó 3) para calcular la distancia a los puntos de conexión')))
+                        except:
+                            print('Error ubicación ')
+                            exit()
+                        if opcion == 1:
+                            get_distance(info[0], matrix)
+                        elif opcion == 2:
+                            get_distance(info[1], matrix)
+                        elif opcion == 3:
+                            get_distance(info[2], matrix)
+                        else:
+                            print('Error ubicación')
+                            exit() 
+                        salir = 1   
+                        while salir != 0:
+                            salir = int(input('Presione 0 para salir'))
+                            if salir == 0:
+                                continue ### necesito que regrese al menu original
                 # Opcion No 6
                 elif opc == 6:
                     opc_fav = int(input('Seleccione opción favorita '))
@@ -190,14 +298,16 @@ if int(usuario) == 51638: # Se verifica el usuario
                                 print(*menu_fix)
                                 opc_2 =  int(input('Elija una opción '))
                                 time.sleep(2)
-                                os.system('clear')
+                                os.system('cls')
                                 print(f'Usted ha elegido la opción {opc_2}')
                     else:
                         print('Error')
                     break
+                # Opcion No 7
                 elif opc == 7:
                     print('Hasta pronto')
                     break
+                # Opcion Dif de 1-7
                 elif opc not in range(1, 8):
                     contador += 1
                     if contador == 3:
@@ -210,4 +320,4 @@ if int(usuario) == 51638: # Se verifica el usuario
 else:
     print('Error') # Si el usuario fue incorrecto sale ERROR
 time.sleep(3)
-os.system('clear')
+os.system('cls')
