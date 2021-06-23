@@ -86,6 +86,9 @@ def get_distance(coordenada, matriz, flag2 = 0):
         bandera = 2
     elif choose == 2:
         bandera = 3
+    else:
+        print('Error zona wifi')
+        exit()
     # latitud y long de las distancias menores
     lat1_c = matriz[need_indx[bandera]][0]
     lon1_c = matriz[need_indx[bandera]][1]
@@ -108,14 +111,14 @@ def get_distance(coordenada, matriz, flag2 = 0):
     tiempo_bici = print('Tiempo en bici: ', int(need_indx[flag[0]]/vel_bici), 'segundos')
     
 datos = []
-password = 1
+password = 83615
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
-os.system('cls')
+os.system('clear')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
-if int(usuario) == 2: # Se verifica el usuario
+if int(usuario) == 51638: # Se verifica el usuario
     contraseña = int(input('Ingrese la contraseña: ')) # Se verifica la contraseña
     if contraseña == password: # Se verifica la contraseña
         num_1 = 638 # Primer No
@@ -302,7 +305,7 @@ if int(usuario) == 2: # Se verifica el usuario
                                 print(*menu_fix)
                                 opc_2 =  int(input('Elija una opción '))
                                 time.sleep(2)
-                                os.system('cls')
+                                os.system('clear')
                                 print(f'Usted ha elegido la opción {opc_2}')
                     else:
                         print('Error')
@@ -324,4 +327,4 @@ if int(usuario) == 2: # Se verifica el usuario
 else:
     print('Error') # Si el usuario fue incorrecto sale ERROR
 time.sleep(3)
-os.system('cls')
+os.system('clear')
