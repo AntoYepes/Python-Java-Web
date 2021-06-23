@@ -21,7 +21,7 @@ def verif(info):
     return prueba 
 
 datos = []
-password = 83615
+password = 83651
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
@@ -53,116 +53,115 @@ if int(usuario) == 51638: # Se verifica el usuario
                         exit()
                 # Opcion No 2
                 elif opc == 2:
-                    datos = []
-                    try:
-                        for i in range(3):
-                            sublist = []
-                            latitud = float(input('Latitud: '))
-                            longitud = float(input('Longitud: '))
-                            sublist.append(latitud)
-                            sublist.append(longitud)
-                            datos.append(sublist)
-                    except:
-                        print('Error')
-                        exit()
-                    coord_casa, coord_trabajo, coord_parque = datos[0], datos[1], datos[2]
-                  
-                    first_time = False 
-                    result = verif(datos)
+                    if datos == []:                        
+                        try:
+                            for i in range(3):
+                                sublist = []
+                                latitud = float(input('Latitud: '))
+                                longitud = float(input('Longitud: '))
+                                sublist.append(latitud)
+                                sublist.append(longitud)
+                                datos.append(sublist)
+                        except:
+                            print('Error')
+                            exit()
+                        coord_casa, coord_trabajo, coord_parque = datos[0], datos[1], datos[2]
                     
-                    if result == 1:
-                        # Calculo para el valor mas cercano al oriente
-                        given_value = -72.321 
-                        flattened = [val for sublist in datos for val in sublist]
-                        absolute_difference_function = lambda list_value : abs(list_value - given_value)
-                        closest_value = min(flattened, key=absolute_difference_function)
-                        i=0
-                        new_list=[]
-                        while i<len(flattened):
-                            new_list.append(flattened[i:i+2])
-                            i+=2
-                        indx = [ele for i, ele in new_list].index(closest_value)
-                        coord = indx+1   
+                        first_time = False 
+                        result = verif(datos)
+                        
+                        if result == 1:
+                            # Calculo para el valor mas cercano al oriente
+                            given_value = -72.321 
+                            flattened = [val for sublist in datos for val in sublist]
+                            absolute_difference_function = lambda list_value : abs(list_value - given_value)
+                            closest_value = min(flattened, key=absolute_difference_function)
+                            i=0
+                            new_list=[]
+                            while i<len(flattened):
+                                new_list.append(flattened[i:i+2])
+                                i+=2
+                            indx = [ele for i, ele in new_list].index(closest_value)
+                            coord = indx+1   
 
-                        # Calculo para el promedio de todos los puntos
-                        promd_lat = (coord_trabajo[0] + coord_casa[0] + coord_parque[0]) / 3
-                        promd_long = (coord_trabajo[1] + coord_casa[1] + coord_parque[1]) / 3
-                        compare_list = [promd_lat, promd_long]
-                                
-                        if first_time == False:
-                            while True:
-                                # Se muestran los datos al usuario
-                                print(f'coordenada [latitud, longitud] 1 : {coord_casa}')
-                                print(f'coordenada [latitud, longitud] 2 : {coord_trabajo}')
-                                print(f'coordenada [latitud, longitud] 3 : {coord_parque}')
-                                print(f'La coordenada {coord} es la que está más al oriente')
-                                print(f'La coordenada {compare_list} es la promedio de todos los puntos')
-                                try:
-                                    opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
-                                except:
-                                    print('Error actualización')
-                                    exit()
-                                if opc_3 == 1:
-                                    coord_new = []
-                                    try:
-                                        latitud = float(input('Latitud: '))
-                                        longitud = float(input('Longitud: '))
-                                    except:
-                                        print('Error')
-                                        exit()
-                                    coord_new.append(latitud)
-                                    coord_new.append(longitud)
-                                    datos[0] = coord_new
-                                    result = verif(datos)
-                                    if result == 1:
-                                        break
-                                    else:
-                                        print('Error coordenada')
-                                        exit()
-                                    
-                                elif opc_3 == 2:
-                                    coord_new = []
-                                    try:
-                                        latitud = float(input('Latitud: '))
-                                        longitud = float(input('Longitud: '))
-                                    except:
-                                        print('Error')
-                                        exit()
-                                    coord_new.append(latitud)
-                                    coord_new.append(longitud)
-                                    datos[1] = coord_new
-                                    result = verif(datos)
-                                    if result == 1:
-                                        break
-                                    else:
-                                        print('Error coordenada')
-                                        exit()
-                                        
-                                elif opc_3 == 3:
-                                    coord_new = []
-                                    try:
-                                        latitud = float(input('Latitud: '))
-                                        longitud = float(input('Longitud: '))
-                                    except:
-                                        print('Error')
-                                        exit()
-                                    coord_new.append(latitud)
-                                    coord_new.append(longitud)
-                                    datos[2] = coord_new
-                                    result = verif(datos)
-                                    if result == 1:
-                                        break
-                                    else:
-                                        print('Error coordenada')
-                                        exit()
-                                        
-                                elif opc_3 == 0:
-                                    break
-                                else:
-                                    print('Error actualización')
-                                    exit()    
+                            # Calculo para el promedio de todos los puntos
+                            promd_lat = (coord_trabajo[0] + coord_casa[0] + coord_parque[0]) / 3
+                            promd_long = (coord_trabajo[1] + coord_casa[1] + coord_parque[1]) / 3
+                            compare_list = [promd_lat, promd_long]   
+         
+                        else:
+                            exit()
                     else:
-                        exit()
+                        while True:
+                                    # Se muestran los datos al usuario
+                                    print(f'coordenada [latitud, longitud] 1 : {coord_casa}')
+                                    print(f'coordenada [latitud, longitud] 2 : {coord_trabajo}')
+                                    print(f'coordenada [latitud, longitud] 3 : {coord_parque}')
+                                    print(f'La coordenada {coord} es la que está más al oriente')
+                                    print(f'La coordenada {compare_list} es la promedio de todos los puntos')
+                                    try:
+                                        opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
+                                    except:
+                                        print('Error actualización')
+                                        exit()
+                                    if opc_3 == 1:
+                                        coord_new = []
+                                        try:
+                                            latitud = float(input('Latitud: '))
+                                            longitud = float(input('Longitud: '))
+                                        except:
+                                            print('Error')
+                                            exit()
+                                        coord_new.append(latitud)
+                                        coord_new.append(longitud)
+                                        datos[0] = coord_new
+                                        result = verif(datos)
+                                        if result == 1:
+                                            break
+                                        else:
+                                            print('Error coordenada')
+                                            exit()
+                                        
+                                    elif opc_3 == 2:
+                                        coord_new = []
+                                        try:
+                                            latitud = float(input('Latitud: '))
+                                            longitud = float(input('Longitud: '))
+                                        except:
+                                            print('Error')
+                                            exit()
+                                        coord_new.append(latitud)
+                                        coord_new.append(longitud)
+                                        datos[1] = coord_new
+                                        result = verif(datos)
+                                        if result == 1:
+                                            break
+                                        else:
+                                            print('Error coordenada')
+                                            exit()
+                                            
+                                    elif opc_3 == 3:
+                                        coord_new = []
+                                        try:
+                                            latitud = float(input('Latitud: '))
+                                            longitud = float(input('Longitud: '))
+                                        except:
+                                            print('Error')
+                                            exit()
+                                        coord_new.append(latitud)
+                                        coord_new.append(longitud)
+                                        datos[2] = coord_new
+                                        result = verif(datos)
+                                        if result == 1:
+                                            break
+                                        else:
+                                            print('Error coordenada')
+                                            exit()
+                                    elif opc_3 == 0:
+                                        break
+                                    else:
+                                        print('Error actualización')
+                                        exit()
                 # Opcion No 6
                 elif opc == 6:
                     opc_fav = int(input('Seleccione opción favorita '))
