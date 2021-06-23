@@ -34,14 +34,14 @@ def verif(info):
             exit()
 
 datos = []
-password = 1
+password = 83615
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
 os.system('clear')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
-if int(usuario) == 2: # Se verifica el usuario
+if int(usuario) == 51638: # Se verifica el usuario
     contraseña = int(input('Ingrese la contraseña: ')) # Se verifica la contraseña
     if contraseña == password: # Se verifica la contraseña
         num_1 = 638 # Primer No
@@ -105,71 +105,71 @@ if int(usuario) == 2: # Se verifica el usuario
                             exit()
                     else:
                         while True:
-                                    # Se muestran los datos al usuario
-                                    print(f'coordenada [latitud, longitud] 1 : {coord_casa}')
-                                    print(f'coordenada [latitud, longitud] 2 : {coord_trabajo}')
-                                    print(f'coordenada [latitud, longitud] 3 : {coord_parque}')
-                                    print(f'La coordenada {coord} es la que está más al oriente')
-                                    print(f'La coordenada {compare_list} es la promedio de todos los puntos')
-                                    try:
-                                        opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
-                                    except:
-                                        print('Error actualización')
-                                        exit()
-                                    if opc_3 == 1:
-                                        coord_new = []
+                            # Se muestran los datos al usuario
+                            print(f'coordenada [latitud, longitud] 1 : {coord_casa}')
+                            print(f'coordenada [latitud, longitud] 2 : {coord_trabajo}')
+                            print(f'coordenada [latitud, longitud] 3 : {coord_parque}')
+                            print(f'La coordenada {coord} es la que está más al oriente')
+                            print(f'La coordenada {compare_list} es la promedio de todos los puntos')
+                            try:
+                                opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
+                            except:
+                                print('Error actualización')
+                                exit()
+                            if opc_3 == 1:
+                                coord_new = []
+                            
+                                latitud = input('Latitud: ')
+                                latitud = verif(latitud)
+                                longitud = input('Longitud: ')
+                                longitud = verif(longitud)
+                                
+                                coord_new.append(latitud)
+                                coord_new.append(longitud)
+                                datos[0] = coord_new
+                                result = verif(datos)
+                                if result == 1:
+                                    break
+                                else:
+                                    print('Error coordenada')
+                                    exit()
+                                
+                            elif opc_3 == 2:
+                                coord_new = []
+                                latitud = input('Latitud: ')
+                                latitud = verif(latitud)
+                                longitud = input('Longitud: ')
+                                longitud = verif(longitud)
+                                coord_new.append(latitud)
+                                coord_new.append(longitud)
+                                datos[1] = coord_new
+                                result = verif(datos)
+                                if result == 1:
+                                    break
+                                else:
+                                    print('Error coordenada')
+                                    exit()
                                     
-                                        latitud = input('Latitud: ')
-                                        latitud = verif(latitud)
-                                        longitud = input('Longitud: ')
-                                        longitud = verif(longitud)
-                                        
-                                        coord_new.append(latitud)
-                                        coord_new.append(longitud)
-                                        datos[0] = coord_new
-                                        result = verif(datos)
-                                        if result == 1:
-                                            break
-                                        else:
-                                            print('Error coordenada')
-                                            exit()
-                                        
-                                    elif opc_3 == 2:
-                                        coord_new = []
-                                        latitud = input('Latitud: ')
-                                        latitud = verif(latitud)
-                                        longitud = input('Longitud: ')
-                                        longitud = verif(longitud)
-                                        coord_new.append(latitud)
-                                        coord_new.append(longitud)
-                                        datos[1] = coord_new
-                                        result = verif(datos)
-                                        if result == 1:
-                                            break
-                                        else:
-                                            print('Error coordenada')
-                                            exit()
-                                            
-                                    elif opc_3 == 3:
-                                        coord_new = []
-                                        latitud = input('Latitud: ')
-                                        latitud = verif(latitud)
-                                        longitud = input('Longitud: ')
-                                        longitud = verif(longitud)
-                                        coord_new.append(latitud)
-                                        coord_new.append(longitud)
-                                        datos[2] = coord_new
-                                        result = verif(datos)
-                                        if result == 1:
-                                            break
-                                        else:
-                                            print('Error coordenada')
-                                            exit()
-                                    elif opc_3 == 0:
-                                        break
-                                    else:
-                                        print('Error actualización')
-                                        exit()
+                            elif opc_3 == 3:
+                                coord_new = []
+                                latitud = input('Latitud: ')
+                                latitud = verif(latitud)
+                                longitud = input('Longitud: ')
+                                longitud = verif(longitud)
+                                coord_new.append(latitud)
+                                coord_new.append(longitud)
+                                datos[2] = coord_new
+                                result = verif(datos)
+                                if result == 1:
+                                    break
+                                else:
+                                    print('Error coordenada')
+                                    exit()
+                            elif opc_3 == 0:
+                                break
+                            else:
+                                print('Error actualización')
+                                exit()
                 # Opcion No 6
                 elif opc == 6:
                     opc_fav = int(input('Seleccione opción favorita '))
