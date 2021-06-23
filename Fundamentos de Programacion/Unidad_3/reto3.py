@@ -118,12 +118,12 @@ if int(usuario) == 2: # Se verifica el usuario
                                         exit()
                                     if opc_3 == 1:
                                         coord_new = []
-                                        try:
-                                            latitud = float(input('Latitud: '))
-                                            longitud = float(input('Longitud: '))
-                                        except:
-                                            print('Error')
-                                            exit()
+                                    
+                                        latitud = input('Latitud: ')
+                                        latitud = verif(latitud)
+                                        longitud = input('Longitud: ')
+                                        longitud = verif(longitud)
+                                        
                                         coord_new.append(latitud)
                                         coord_new.append(longitud)
                                         datos[0] = coord_new
@@ -136,12 +136,10 @@ if int(usuario) == 2: # Se verifica el usuario
                                         
                                     elif opc_3 == 2:
                                         coord_new = []
-                                        try:
-                                            latitud = float(input('Latitud: '))
-                                            longitud = float(input('Longitud: '))
-                                        except:
-                                            print('Error')
-                                            exit()
+                                        latitud = input('Latitud: ')
+                                        latitud = verif(latitud)
+                                        longitud = input('Longitud: ')
+                                        longitud = verif(longitud)
                                         coord_new.append(latitud)
                                         coord_new.append(longitud)
                                         datos[1] = coord_new
@@ -154,12 +152,10 @@ if int(usuario) == 2: # Se verifica el usuario
                                             
                                     elif opc_3 == 3:
                                         coord_new = []
-                                        try:
-                                            latitud = float(input('Latitud: '))
-                                            longitud = float(input('Longitud: '))
-                                        except:
-                                            print('Error')
-                                            exit()
+                                        latitud = input('Latitud: ')
+                                        latitud = verif(latitud)
+                                        longitud = input('Longitud: ')
+                                        longitud = verif(longitud)
                                         coord_new.append(latitud)
                                         coord_new.append(longitud)
                                         datos[2] = coord_new
