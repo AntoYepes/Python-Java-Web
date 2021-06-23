@@ -275,7 +275,11 @@ if int(usuario) == 2: # Se verifica el usuario
                             exit() 
                         salir = 1   
                         while salir != 0:
-                            salir = int(input('Presione 0 para salir'))
+                            try:
+                                salir = int(input('Presione 0 para salir'))
+                            except:
+                                print('Error ubicación ')
+                                exit()
                             if salir == 0:
                                 continue ### necesito que regrese al menu original
                 # Opcion No 6
