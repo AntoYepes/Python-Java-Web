@@ -25,7 +25,7 @@ password = 83615
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
-os.system('cls')
+os.system('clear')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
 if int(usuario) == 51638: # Se verifica el usuario
@@ -61,7 +61,17 @@ if int(usuario) == 51638: # Se verifica el usuario
                         sublist.append(latitud)
                         sublist.append(longitud)
                         datos.append(sublist)
-                
+                    try:
+                        for i in range(3):
+                            sublist = []
+                            latitud = float(input('Latitud: '))
+                            longitud = float(input('Longitud: '))
+                            sublist.append(latitud)
+                            sublist.append(longitud)
+                            datos.append(sublist)
+                    except:
+                        print('Error')
+                        exit()
                     coord_casa, coord_trabajo, coord_parque = datos[0], datos[1], datos[2]
                   
                     first_time = False 
@@ -94,12 +104,19 @@ if int(usuario) == 51638: # Se verifica el usuario
                                 print(f'coordenada [latitud, longitud] 3 : {coord_parque}')
                                 print(f'La coordenada {coord} es la que está más al oriente')
                                 print(f'La coordenada {compare_list} es la promedio de todos los puntos')
-                                
-                                opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
+                                try:
+                                    opc_3 = int(input('Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú'))
+                                except:
+                                    print('Error actualización')
+                                    exit()
                                 if opc_3 == 1:
                                     coord_new = []
-                                    latitud = float(input('Latitud: '))
-                                    longitud = float(input('Longitud: '))
+                                    try:
+                                        latitud = float(input('Latitud: '))
+                                        longitud = float(input('Longitud: '))
+                                    except:
+                                        print('Error')
+                                        exit()
                                     coord_new.append(latitud)
                                     coord_new.append(longitud)
                                     datos[0] = coord_new
@@ -112,8 +129,12 @@ if int(usuario) == 51638: # Se verifica el usuario
                                     
                                 elif opc_3 == 2:
                                     coord_new = []
-                                    latitud = float(input('Latitud: '))
-                                    longitud = float(input('Longitud: '))
+                                    try:
+                                        latitud = float(input('Latitud: '))
+                                        longitud = float(input('Longitud: '))
+                                    except:
+                                        print('Error')
+                                        exit()
                                     coord_new.append(latitud)
                                     coord_new.append(longitud)
                                     datos[1] = coord_new
@@ -126,8 +147,12 @@ if int(usuario) == 51638: # Se verifica el usuario
                                         
                                 elif opc_3 == 3:
                                     coord_new = []
-                                    latitud = float(input('Latitud: '))
-                                    longitud = float(input('Longitud: '))
+                                    try:
+                                        latitud = float(input('Latitud: '))
+                                        longitud = float(input('Longitud: '))
+                                    except:
+                                        print('Error')
+                                        exit()
                                     coord_new.append(latitud)
                                     coord_new.append(longitud)
                                     datos[2] = coord_new
@@ -165,7 +190,7 @@ if int(usuario) == 51638: # Se verifica el usuario
                                 print(*menu_fix)
                                 opc_2 =  int(input('Elija una opción '))
                                 time.sleep(2)
-                                os.system('cls')
+                                os.system('clear')
                                 print(f'Usted ha elegido la opción {opc_2}')
                     else:
                         print('Error')
@@ -185,4 +210,4 @@ if int(usuario) == 51638: # Se verifica el usuario
 else:
     print('Error') # Si el usuario fue incorrecto sale ERROR
 time.sleep(3)
-os.system('cls')
+os.system('clear')
