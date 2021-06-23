@@ -61,8 +61,7 @@ if int(usuario) == 51638: # Se verifica el usuario
                         sublist.append(latitud)
                         sublist.append(longitud)
                         datos.append(sublist)
-                   
-                    print(datos)
+                
                     coord_casa, coord_trabajo, coord_parque = datos[0], datos[1], datos[2]
                   
                     first_time = False 
