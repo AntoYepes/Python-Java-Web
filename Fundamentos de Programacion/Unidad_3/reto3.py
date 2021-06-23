@@ -5,30 +5,43 @@ import math
 
 # Funcion para verificar los limites y la long de cada entrada
 def verif(info):
-    for i in info:
-        if len(i) != 2:
-            print('Error')
-            prueba = 0
-            exit()
-        else:
-            if (i[0] < 6.306 and i[0] > 5.888) and (i[1] < -72.321 and i[1] > -72.552):
-                prueba = 1
-                continue
-            else: 
-                print('Error coordenada')
+    if type(info) == list:        
+        for i in info:
+            if len(i) != 2:
+                print('Error2')
                 prueba = 0
                 exit()
-    return prueba 
+            else:
+                if (i[0] < 6.306 and i[0] > 5.888) and (i[1] < -72.321 and i[1] > -72.552):
+                    prueba = 1
+                    continue
+                else: 
+                    print('Error coordenada')
+                    prueba = 0
+                    exit()
+        return prueba
+    elif type(info) == str:
+        try:
+            x = float(info)
+            
+        except:
+            print('Error')
+            exit()
+        if (x < 6.306 and x > 5.888) or (x < -72.321 and x > -72.552):
+            return(x)
+        else:
+            print('Error coordenada')
+            exit()
 
 datos = []
-password = 83651
+password = 1
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
 os.system('clear')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
-if int(usuario) == 51638: # Se verifica el usuario
+if int(usuario) == 2: # Se verifica el usuario
     contraseña = int(input('Ingrese la contraseña: ')) # Se verifica la contraseña
     if contraseña == password: # Se verifica la contraseña
         num_1 = 638 # Primer No
@@ -54,17 +67,16 @@ if int(usuario) == 51638: # Se verifica el usuario
                 # Opcion No 2
                 elif opc == 2:
                     if datos == []:                        
-                        try:
-                            for i in range(3):
-                                sublist = []
-                                latitud = float(input('Latitud: '))
-                                longitud = float(input('Longitud: '))
-                                sublist.append(latitud)
-                                sublist.append(longitud)
-                                datos.append(sublist)
-                        except:
-                            print('Error')
-                            exit()
+                        for i in range(3):
+                            sublist = []
+                            latitud = input('Latitud: ')
+                            latitud = verif(latitud)
+                            longitud = input('Longitud: ')
+                            longitud = verif(longitud)
+                            sublist.append(latitud)
+                            sublist.append(longitud)
+                            datos.append(sublist)
+                    
                         coord_casa, coord_trabajo, coord_parque = datos[0], datos[1], datos[2]
                     
                         first_time = False 
