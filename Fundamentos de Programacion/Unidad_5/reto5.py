@@ -53,7 +53,7 @@ def get_distance(coordenada, matriz, flag2 = 0):
         lat2 = i[0]
         lon2 = i[1]
         d_lat = round(lat2 - lat1, 3)
-        d_lon = round(lon2 - lon1, 3)  
+        d_lon = round(lon2 - lon1, 3)
         r_tierra = 6372.795
         distance = 2 * r_tierra * math.sin(math.sqrt((math.pow(math.sin(d_lat/2), 2))+(math.cos(lat1))*(math.cos(lat2))*(math.pow(math.sin(d_lon/2), 2))))
         list_distc.append(int(distance))
@@ -74,16 +74,15 @@ def get_distance(coordenada, matriz, flag2 = 0):
         u2 = users_1
          
     if flag2 == 1:
-        return matriz[need_indx[2]]
-    
+        return matriz[need_indx[2]]     # Retorna la latitud, longitud y los usuarios te quiero <3
+     # Usted es una mujer maravillosa <3
     if flag2 == 2:
-        distanc = need_indx[flag[0]]
-        a_pie = 'a pie'
-        pie = f'{int(need_indx[flag[0]]/vel_pie)} segundos'
-        bicicleta =  f'{int(need_indx[flag[0]]/vel_bici)} segundos' # verificar las salidas
-        return [distanc, a_pie, pie, 'bicicleta', bicicleta]
+        distanc = need_indx[0]
+        pie = f'{int(need_indx[2]/vel_pie)} segundos'
+        bicicleta =  f'{int(need_indx[2]/vel_bici)} segundos' # verificar las salidas
+        return [distanc, 'a pie', pie, 'bicicleta', bicicleta]
         
-    if flag2 == 0:    
+    if flag2 == 0:
         print(f'La zona wifi 1: ubicada en {coord} a {need_indx[flag[0]]} metros , tiene en promedio {u1} usuarios')
         print(f'La zona wifi 2: ubicada en {coord} a {need_indx[flag[1]]} metros , tiene en promedio {u2} usuarios')
     try:
@@ -91,6 +90,7 @@ def get_distance(coordenada, matriz, flag2 = 0):
     except:
         print('Error zona wifi')
         exit()
+    
     if choose == 1:
         bandera = 2
     elif choose == 2:
@@ -119,6 +119,7 @@ def get_distance(coordenada, matriz, flag2 = 0):
     tiempo_bici = print('Tiempo en bici: ', int(need_indx[flag[0]]/vel_bici), 'segundos')
     
 datos = []
+opcion = []
 password = 1
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
@@ -294,14 +295,15 @@ if int(usuario) == 2: # Se verifica el usuario
                                 continue ### necesito que regrese al menu original
                 # Opcion No 4
                 elif opc == 4:
-                    if datos == []:
+                    if datos == [] or opcion == []:
                         print('Error de alistamiento')
                         exit()
                     else:
                         if opcion == 1:
-                            x = get_distance(datos[0], matrix, 1)
-                            w = get_distance(datos[0], matrix, 2)
-                            informacion = {'actual' : datos[0],'zonawifi1' : x, 'recorrido' : [w[0] , w[1], w[2]]}
+                            x = get_distance(datos[0], matrix, 1)      # Latitud y longitud de lo actual, con usuarios
+                            w = get_distance(datos[0], matrix, 2)      # la distancia, el transporte y el tiempo
+                            z = w[0], f'{w[1]} | {w[3]}', f'{w[2]} | {w[4]}'
+                            informacion = {'actual' : datos[0],'zonawifi1' : x, 'recorrido' : z}
                             print(informacion)
                 # Opcion No 6
                 elif opc == 6:
