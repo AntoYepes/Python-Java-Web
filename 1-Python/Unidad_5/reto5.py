@@ -2,6 +2,7 @@
 import os
 import time
 import math
+import json
 
 # Funcion para verificar los limites y la long de cada entrada
 def verif(info):
@@ -42,7 +43,7 @@ def min_values(lista):
     return [m1, m2, indx1, indx2]
 
 # Funcion que calcula la distancia con la coord actual
-def get_distance(coordenada, matriz, flag2 = 0):
+def get_distance(coordenada, matriz, flag2=False):
     coord = coordenada # toma el valor de la coordenada que el usuario escoja
     # punto 1 coord
     lat1 = coord[0] # latitud punto1
@@ -68,65 +69,76 @@ def get_distance(coordenada, matriz, flag2 = 0):
         flag = [0, 1]
         u1 = users_1
         u2 = users_2
+        band = 2
+        zona = matriz[need_indx[2]]
     else:
         flag = [1, 0]
         u1 = users_2 
         u2 = users_1
-         
-    if flag2 == 1:
-        return matriz[need_indx[2]]
+        band = 3
+        zona = matriz[need_indx[3]]
     
-    if flag2 == 2:
-        distanc = need_indx[flag[0]]
-        a_pie = 'a pie'
-        pie = f'{int(need_indx[flag[0]]/vel_pie)} segundos'
-        bicicleta =  f'{int(need_indx[flag[0]]/vel_bici)} segundos' # verificar las salidas
-        return [distanc, a_pie, pie, 'bicicleta', bicicleta]
+    distc_1 = need_indx[flag[0]]
+    distc_2 = need_indx[flag[1]]
+    tiemp_1 = int(need_indx[flag[0]]/vel_pie)
+    tiemp_2 = int(need_indx[flag[0]]/vel_bici)
+
+    if flag2 == 0:
+        print(f'La zona wifi 1: ubicada en {coord} a {distc_1} metros , tiene en promedio {u1} usuarios') 
+        print(f'La zona wifi 2: ubicada en {coord} a {distc_2} metros , tiene en promedio {u2} usuarios') 
+        try:
+            choose = int(input(('Elija 1 o 2 para recibir indicaciones de llegada')))
+        except:
+            print('Error zona wifi')
+            exit()
+        if choose == 1:
+            bandera = 2
+        elif choose == 2:
+            bandera = 3
+        else:
+            print('Error zona wifi')
+            exit()
+        # latitud y long de las distancias menores
+        lat1_c = matriz[need_indx[bandera]][0]
+        lon1_c = matriz[need_indx[bandera]][1]
         
-    if flag2 == 0:    
-        print(f'La zona wifi 1: ubicada en {coord} a {need_indx[flag[0]]} metros , tiene en promedio {u1} usuarios')
-        print(f'La zona wifi 2: ubicada en {coord} a {need_indx[flag[1]]} metros , tiene en promedio {u2} usuarios')
-    try:
-        choose = int(input(('Elija 1 o 2 para recibir indicaciones de llegada')))
-    except:
-        print('Error zona wifi')
-        exit()
-    if choose == 1:
-        bandera = 2
-    elif choose == 2:
-        bandera = 3
-    else:
-        print('Error zona wifi')
-        exit()
-    # latitud y long de las distancias menores
-    lat1_c = matriz[need_indx[bandera]][0]
-    lon1_c = matriz[need_indx[bandera]][1]
-    
-    address_lat = lat1 - lat1_c
-    if address_lat < 0:
-        lat_result = 'norte'
-    else:
-        lat_result = 'sur'
-    address_lon = lon1 - lon1_c
-    if address_lon < 0:
-        lon_result = 'este'
-    else:
-        lon_result = 'oeste'
-    print(f'Para llegar a la zona wifi dirigirse primero al {lon_result} y luego hacia el {lat_result}')
-        
-    
-    tiempo_pie = print('Tiempo a pie: ', int(need_indx[flag[0]]/vel_pie), 'segundos')
-    tiempo_bici = print('Tiempo en bici: ', int(need_indx[flag[0]]/vel_bici), 'segundos')
-    
+        address_lat = lat1 - lat1_c
+        if address_lat < 0:
+            lat_result = 'norte'
+        else:
+            lat_result = 'sur'
+        address_lon = lon1 - lon1_c
+        if address_lon < 0:
+            lon_result = 'este'
+        else:
+            lon_result = 'oeste'
+            
+        print(f'Para llegar a la zona wifi dirigirse primero al {lon_result} y luego hacia el {lat_result}')
+        tiempo_pie = print('Tiempo a pie: ', tiemp_1, 'segundos') 
+        tiempo_bici = print('Tiempo en bici: ', tiemp_2, 'segundos')
+     
+    if flag2 == True:
+        return [band, zona, distc_1, distc_2, tiemp_1, tiemp_2] 
+
+def get_info(lista, matriz):
+    w = get_distance(lista, matriz, True)
+    if w[0] == 2:
+        informacion = {'actual' : lista, 'wifi 1' : w[1], 'recorrido' : [w[2] ,'a pie | bicicleta', f'{w[4]} | {w[5]}']}
+        print(informacion)
+    elif w[0] == 3:
+        informacion = {'actual' : lista, 'wifi 2' : w[1], 'recorrido' : [w[3] ,'a pie | bicicleta', f'{w[4]} | {w[5]}']}
+        print(informacion)
+
 datos = []
-password = 1
+password = 83615
+menu = ['1 Cambiar contraseña\n', '2 Ingresar coordenadas actuales\n', '3 Ubicar zona wifi más cercana\n', '4 Guardar archivo con ubicación cercana\n', '5 Actualizar registros de zonas wifi desde archivo\n','6 Elegir opción de menú favorita\n', '7 Cerrar sesión']
 # Mensaje de bienvenida
 print('Bienvenido al sistema de ubicación para zonas públicas WIFI')
 time.sleep(1) 
-os.system('cls')
+os.system('clear')
 # Pedimos por consola el usuario
 usuario = input('Ingrese el usuario: ')
-if int(usuario) == 2: # Se verifica el usuario
+if int(usuario) == 51638: # Se verifica el usuario
     contraseña = int(input('Ingrese la contraseña: ')) # Se verifica la contraseña
     if contraseña == password: # Se verifica la contraseña
         num_1 = 638 # Primer No
@@ -134,7 +146,6 @@ if int(usuario) == 2: # Se verifica el usuario
         captcha = input(f'Resuelva la suma {num_1} + {num_2} = ') # Captcha, la suma para comprobar si el inicio de sesion corresponde a un usuario
         if int(captcha) == 641:
             print('Sesión iniciada') # Si la suma es correcta sale sesion iniciada
-            menu = ['1 Cambiar contraseña\n', '2 Ingresar coordenadas actuales\n', '3 Ubicar zona wifi más cercana\n', '4 Guardar archivo con ubicación cercana\n', '5 Actualizar registros de zonas wifi desde archivo\n','6 Elegir opción de menú favorita\n', '7 Cerrar sesión']
             contador = 0
             while True:
                 print(*menu)
@@ -299,10 +310,25 @@ if int(usuario) == 2: # Se verifica el usuario
                         exit()
                     else:
                         if opcion == 1:
-                            x = get_distance(datos[0], matrix, 1)
-                            w = get_distance(datos[0], matrix, 2)
-                            informacion = {'actual' : datos[0],'zonawifi1' : x, 'recorrido' : [w[0] , w[1], w[2]]}
-                            print(informacion)
+                            get_info(datos[0], matrix)
+                        elif opcion == 2:
+                            get_info(datos[1], matrix)
+                        elif opcion == 3:
+                            get_info(datos[2], matrix)
+                            
+                        select = int(input('¿Está de acuerdo con la información a exportar?Presione 1 para confirmar, 0 para regresar al menú principal'))  
+                        if select == 1:
+                            print('Exportando archivo')
+                            exit()
+                        elif select == 0:
+                            continue
+                # Opcion No 5
+                elif opc == 5:
+                    with open('archivo.txt') as f:
+                        lst = json.load(f)
+                        out = int(input('Datos de coordenadas para zonas wifi actualizados, presione 0 para regresar al menú principal '))  
+                        if out == 0:
+                            continue    
                 # Opcion No 6
                 elif opc == 6:
                     opc_fav = int(input('Seleccione opción favorita '))
@@ -323,7 +349,7 @@ if int(usuario) == 2: # Se verifica el usuario
                                 print(*menu_fix)
                                 opc_2 =  int(input('Elija una opción '))
                                 time.sleep(2)
-                                os.system('cls')
+                                os.system('clear')
                                 print(f'Usted ha elegido la opción {opc_2}')
                     else:
                         print('Error')
@@ -345,4 +371,4 @@ if int(usuario) == 2: # Se verifica el usuario
 else:
     print('Error') # Si el usuario fue incorrecto sale ERROR
 time.sleep(3)
-os.system('cls')
+os.system('clear')

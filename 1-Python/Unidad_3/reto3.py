@@ -8,7 +8,7 @@ def verif(info):
     if type(info) == list:        
         for i in info:
             if len(i) != 2:
-                print('Error2')
+                print('Error')
                 prueba = 0
                 exit()
             else:
