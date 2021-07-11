@@ -54,7 +54,7 @@ def get_distance(coordenada, matriz, flag2=False):
         lat2 = i[0]
         lon2 = i[1]
         d_lat = round(lat2 - lat1, 3)
-        d_lon = round(lon2 - lon1, 3)  
+        d_lon = round(lon2 - lon1, 3)
         r_tierra = 6372.795
         distance = 2 * r_tierra * math.sin(math.sqrt((math.pow(math.sin(d_lat/2), 2))+(math.cos(lat1))*(math.cos(lat2))*(math.pow(math.sin(d_lon/2), 2))))
         list_distc.append(int(distance))
@@ -305,7 +305,7 @@ if int(usuario) == 51638: # Se verifica el usuario
                                 continue ### necesito que regrese al menu original
                 # Opcion No 4
                 elif opc == 4:
-                    if datos == []:
+                    if datos == [] or opcion == []:
                         print('Error de alistamiento')
                         exit()
                     else:
