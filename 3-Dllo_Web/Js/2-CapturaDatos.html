@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="">
+        <h2>Sumar</h2>
+        <input type="text" name="" placeholder="Numero 1" id="txt1">
+        <input type="text" name="" placeholder="Numero 2" id="txt2">
+        <hr>
+        <input type="text" name="" id="resultado">
+        <input type="button" name="bt_nombre" value="Mostrar Nombre" onclick="sumar_desdeForm()"><br>
+        
+        <div>
+            <h2>Datos Personales</h2>
+            <input type="text" name="" id="txt_nombre" placeholder="Nombre" onkeyup="datos()">
+            <input type="text" name="" id="txt_apellido" placeholder="Apellido" onkeyup="datos()">
+            <p id="p1"></p>
+        
+
+            <input type="radio" name="rd_sexo" value="Masculino" id="sexo_m"><label id="">Masculino</label>
+            <input type="radio" name="rd_sexo" value="Femenino" id="sexo_f"><label id="">Femenino</label>
+
+            <input type="button" name="bt_enviar" value="Send" onclick="Datos_personales()">
+            <hr>
+            <input type="number" name="" id="dia" min="0" max="8">
+            <input type="button" name="bt" value="Dia" onclick=dia_semana()>
+
+        </div>
+    </form>
+</body>
+</html>
+
+<script type="text/javascript" src="js/scripts2.js"></script>

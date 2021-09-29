@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMULARIO 2</title>
+</head>
+<body>
+    <form action="" method="get">
+    <h1>ComboBox</h1>
+    <label for="f">Seleccionar Frutas</label>
+    <p>
+        <select multiple size="6" name="frutas" id="">
+            <option value="">Seleccionar</option>
+            <option value="Manzana">Manzana</option>
+            <option value="Pera">Pera</option>
+            <option value="Fresa" selected>Fresa</option>
+            <option value="Uva">Uva</option>
+            <option value="Banano">Banano</option>
+            <option value="Durazno">Durazno</option>
+            <option value="Melon">Melon</option>
+        </select>
+        <input type="submit" name="enviar" value="Enviar">
+    </p>
+    <p>
+        <select name="sistemas_op" id="">
+            <option value="Ningunno">Ninguno</option>
+            <optgroup label="Windows">
+                <option value="Vista">Vista</option>
+                <option value="Win7">Win7</option>
+            </optgroup>
+            <optgroup label="Linux">
+                <option value="RedHat">RedHat</option>
+                <option value="Suse">Suse</option>
+            </optgroup>
+        </select>
+    </p>
+    <label for="obs">Observaciones</label>
+    <textarea name="observaciones" id="obs" cols="30" rows="10"></textarea>
+
+    </form>
+</body>
+</html>

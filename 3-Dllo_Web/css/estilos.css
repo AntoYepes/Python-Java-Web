@@ -1,0 +1,18 @@
+p{
+    color:red;
+    text-align: center;
+}
+
+#conID{
+    color:rgb(210, 46, 193);
+    text-align: right;
+}
+
+#conid{
+    color: yellow;
+    text-align: justify;
+}
+
+.clase{
+    color: #2ed23a;
+}
